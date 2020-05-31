@@ -97,10 +97,6 @@ public class ExamServiceImpl implements ExamService {
 			answer.setExamTime(new Date());
 			answer.setQuestionSequence(questionSequence);
 			answer.setExamPaperId(examPaperId);
-
-//			AllUserInfo userInfo = userInfoRepository.getOne(userId);
-//			answer.setCandidateName(userInfo.getUserName());
-//			answer.setCandidateDept(userInfo.getDepartment());
 			
 			answer.setDzb(dzb);
 			float fullScore = 0;
@@ -364,9 +360,11 @@ public class ExamServiceImpl implements ExamService {
 			excelList.remove(0);
 			for (List<String> rowMsg : excelList) {
 				String type = rowMsg.get(1).replace(" ", "").replace(" ", "");
-				if(type.length()<2) {
+				
+				if(type.length()<1) {
 					break;
 				}
+				
 				AllQuestionInfo allQuestionInfo = new AllQuestionInfo();
 				allQuestionInfo.setQuestionId(0);
 				allQuestionInfo.setDzb(dzb);

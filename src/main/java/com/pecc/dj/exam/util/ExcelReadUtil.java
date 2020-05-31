@@ -1,5 +1,7 @@
 package com.pecc.dj.exam.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +37,13 @@ public class ExcelReadUtil {
         }
         /** 得到第一个sheet */
         Sheet sheet = wb.getSheetAt(0);
+        
         /** 得到Excel的行数 */
         int totalRows = sheet.getPhysicalNumberOfRows();
+        
         /** 得到Excel的列数 */
         int totalCells = 0;
+        
         if (totalRows >= 1 && sheet.getRow(0) != null) {
             totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
         }
@@ -46,7 +51,7 @@ public class ExcelReadUtil {
         /** 循环Excel的行 */
         for (int r = 0; r < totalRows; r++) {
             Row row = sheet.getRow(r);
-            if (row == null)
+            if (row.getCell(0) == null)
                 continue;
             List<String> rowLst = new ArrayList<String>();
             /** 循环Excel的列 */
@@ -64,7 +69,12 @@ public class ExcelReadUtil {
         }
         return dataLst;
     }
-
+    
+    public static void main(String[] args) throws IOException {
+		File file = new File("C:\\Users\\86186\\Desktop\\exam代码\\test.xlsx");
+		InputStream is = new FileInputStream(file);
+		readExcel(is);
+	}
     
 //	public static <T> List<T> readExcel2Bean(InputStream is, Class<T> tClass)
 //            throws IOException, IllegalAccessException, InstantiationException {
