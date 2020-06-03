@@ -11,4 +11,5 @@ public interface CandidateAnswerRepository extends JpaRepository<CandidateAnswer
 	List<CandidateAnswer> findAllByCandidateId(String candidateId, Sort sort);
 	List<CandidateAnswer> findAllByDzb(String dzb);
 	List<CandidateAnswer> findAllByExamPaperId(String examPaperId);
+	CandidateAnswer findByCandidateIdAndDzb(String candidateId, String dzb);
 }

@@ -59,7 +59,7 @@ public class ExamServiceImpl implements ExamService {
 	private DzbRepository dzbRepository;
 	
 	@Override
-	public List<Map<String, String>> getQuestions(String dzb) {
+	public List<Map<String, String>> getQuestions(String dzb, boolean hasAnswerFlag) {
 		List<AllQuestionInfo> questions = allQuestionInfoRepository.findAllByDzb(dzb);
 		if (questions.size()==0) {
 			throw new ExamException(ErrorDefEnum.DZB_ERROR);
@@ -73,6 +73,9 @@ public class ExamServiceImpl implements ExamService {
 			map.put("QUESTION", question.getQuestion());
 			map.put("OPTIONS", question.getOptions());
 			map.put("SCORE", question.getScore()+"");
+			if(hasAnswerFlag) {
+				map.put("RIGHTANSWER", question.getRightAnswer());
+			}
 			result.add(map);
 		}
 		return result;
@@ -80,10 +83,18 @@ public class ExamServiceImpl implements ExamService {
 
 	@Override
 	public boolean handQuestions(HandQuestionsRequest handRequest) {
-		try {
-			String userId = handRequest.getUserId();
-			String questionSequence = handRequest.getQuestionSequence();
-			String dzb = handRequest.getDzb();
+		String userId = handRequest.getUserId();
+		String questionSequence = handRequest.getQuestionSequence();
+		String dzb = handRequest.getDzb();
+//		if(dzbRepository.getOneByDzb(dzb) == null) {
+//			throw new ExamException(ErrorDefEnum.DZB_ERROR);
+//		}
+		if(candidateAnswerRepository.findByCandidateIdAndDzb(userId, dzb) != null) {
+			throw new ExamException(ErrorDefEnum.USER_HAS_EXAMED);
+		}
+		
+		
+		try {		
 			String examPaperId = handRequest.getExamPaperId();
 			Map<String, String> candidateAnswer = handRequest.getCandidateAnswer();
 			

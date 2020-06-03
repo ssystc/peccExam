@@ -12,7 +12,7 @@ import com.pecc.dj.exam.response.GetScoreResponse;
 
 public interface ExamService {
 	
-	List<Map<String, String>> getQuestions(String dzb);			//根据党支部标识获取题目内容
+	List<Map<String, String>> getQuestions(String dzb, boolean hasAnswerFlag);			//根据党支部标识获取题目内容
 	
 	boolean selectDzbForNextExam(String dzb);					//选择下次考试的党支部标识
 	

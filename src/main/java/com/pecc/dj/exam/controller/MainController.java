@@ -45,7 +45,13 @@ public class MainController {
 	@ApiOperation(value = "根据党支部获取题目")
     @GetMapping(value = "/getExam/{dzb}")
 	public List<Map<String, String>> distributeQuestions(@ApiParam(value="党支部标识") @PathVariable String dzb) {
-		return examServiceImpl.getQuestions(dzb);
+		return examServiceImpl.getQuestions(dzb, false);
+    }
+	
+	@ApiOperation(value = "根据党支部获取题目(展示学习)")
+    @GetMapping(value = "/getExamForLearn/{dzb}")
+	public List<Map<String, String>> distributeQuestionsForLearn(@ApiParam(value="党支部标识") @PathVariable String dzb) {
+		return examServiceImpl.getQuestions(dzb, true);
     }
 	
 	@ApiOperation(value = "选定下一次考试题目，即选中下次考试的dzb标识")

@@ -21,6 +21,8 @@ public enum ErrorDefEnum {
 	
 	DZB_EXISTED("001007", "dzb标识已存在！"),
 	
+	USER_HAS_EXAMED("001008", "该考生已提交过该考卷答案！"),
+	
 	GENERATE_EXAM_PAPER_ERROR("002001", "生成考卷失败！"),
 	
 	ADD_CANDIDATE_ERROR("002002", "为考卷添加考生名单失败!"),
