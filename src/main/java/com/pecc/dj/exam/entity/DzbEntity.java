@@ -8,19 +8,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//试题类
 @Entity
 public class DzbEntity {
 	
+	//一套试题的主键ID
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	//一套试题的唯一英文名称
 	@Column
 	private String dzb;
 	
+	//一套试题的唯一中文名
 	@Column
 	private String name;
 
+	//上传时间
 	@Column
 	private Date timeFlagDate;
 	
