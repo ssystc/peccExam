@@ -16,16 +16,16 @@ public class CandidateAnswer {
 	private Integer id;
 	
 	@Column
-	private String candidateId;
+	private String candidateId;		//用户ID，即工号
 	
 	@Column
-	private String candidateName;
+	private String candidateName;	//用户中文名
 	
 	@Column
-	private String candidateDept;
+	private String candidateDept;	//科室
 	
 	@Column
-	private String dzb;
+	private String dzb;				//某套试卷的英文名
 
 	@Lob
 	@Column(columnDefinition="text")
@@ -44,7 +44,7 @@ public class CandidateAnswer {
 	private String questionSequence;
 	
 	@Column
-	private String examPaperId;
+	private String examPaperId;			//好像用不到了
 	
 	@Column
 	private String blank1;

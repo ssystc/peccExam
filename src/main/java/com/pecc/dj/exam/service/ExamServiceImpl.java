@@ -22,12 +22,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pecc.dj.exam.constant.ErrorDefEnum;
 import com.pecc.dj.exam.entity.AllQuestionInfo;
+import com.pecc.dj.exam.entity.AllUserInfo;
 //import com.pecc.dj.exam.entity.AllUserInfo;
 import com.pecc.dj.exam.entity.CandidateAnswer;
 import com.pecc.dj.exam.entity.DzbEntity;
 //import com.pecc.dj.exam.entity.ExamPaperInfo;
 import com.pecc.dj.exam.exception.ExamException;
 import com.pecc.dj.exam.repository.AllQuestionInfoRepository;
+import com.pecc.dj.exam.repository.AllUserInfoRespository;
 //import com.pecc.dj.exam.repository.AllUserInfoRespository;
 import com.pecc.dj.exam.repository.CandidateAnswerRepository;
 import com.pecc.dj.exam.repository.DzbRepository;
@@ -49,8 +51,8 @@ public class ExamServiceImpl implements ExamService {
 	@Autowired
 	private CandidateAnswerRepository candidateAnswerRepository;
 	
-//	@Autowired
-//	private AllUserInfoRespository userInfoRepository;
+	@Autowired
+	private AllUserInfoRespository userInfoRepository;
 //	
 //	@Autowired
 //	private ExamPaperInfoRepository examInfoRepository;
@@ -101,7 +103,12 @@ public class ExamServiceImpl implements ExamService {
 			Gson gson = new GsonBuilder().create();
 			String candidateAnswerString = gson.toJson(candidateAnswer);
 			
+			AllUserInfo userInfo = userInfoRepository.getOne(userId);
+			
+			
 			CandidateAnswer answer = new CandidateAnswer();
+			answer.setCandidateName(userInfo.getUserName());
+			answer.setCandidateDept(userInfo.getDepartment());
 			answer.setId(0);
 			answer.setCandidateAnswerMap(candidateAnswerString);
 			answer.setCandidateId(userId);
