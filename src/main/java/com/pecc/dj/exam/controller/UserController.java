@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pecc.dj.exam.constant.ErrorDefEnum;
+import com.pecc.dj.exam.entity.AllUserInfo;
 import com.pecc.dj.exam.response.CommonResponse;
 import com.pecc.dj.exam.service.UserServiceImpl;
 
@@ -36,11 +37,11 @@ public class UserController {
 	public ResponseEntity<?> authUser( @RequestBody Map<String, String> params) {
 		String userId = params.get("userId");
 		String password = params.get("password");
-		boolean isAuth = userService.userAuth(userId, password);
-		if (isAuth == true) {
-			return CommonResponse.success("用户名密码验证成功！");
+		AllUserInfo info = userService.userAuth(userId, password);
+		if (info != null) {
+			return CommonResponse.success(info);
 		} else {
-			return CommonResponse.error(ErrorDefEnum.USER_PASS_ERROR, HttpStatus.UNAUTHORIZED);
+			return CommonResponse.error(ErrorDefEnum.USER_PASS_ERROR, HttpStatus.OK);
 		}
     }
 	

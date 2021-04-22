@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService {
 //	private ExamPaperInfoRepository paperInfoRepository;
 	
 	@Override
-	public boolean userAuth(String userId, String password) {
+	public AllUserInfo userAuth(String userId, String password) {
 		AllUserInfo info = allUserInfoRespository.findByUserIdAndPassword(userId, password);
 		if(info != null) {
-			return true;
+			return info;
 		}
-		return false;
+		return null;
 	}
 
 

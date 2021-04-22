@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ExamException.class)
 	public CommonResponse.ErrResponse httpSessionRequiredException(HttpServletResponse response, ExamException ex){
-		response.setStatus(HttpStatus.FORBIDDEN.value());
+		response.setStatus(HttpStatus.OK.value());
 		return new CommonResponse.ErrResponse(ex.getErrCode(), ex.getMessage());
 	}
 	
